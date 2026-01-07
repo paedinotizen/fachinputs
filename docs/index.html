@@ -78,14 +78,17 @@
             complete: function(results) {
                 var tableBody = document.querySelector("#csvTable tbody");
                 results.data.forEach(function(row) {
-                    var tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${row.Titel}</td>
-                        <td>${row.Kurzbeschreibung}</td>
-                        <td>${row.Datum}</td>
-                        <td><a href="${row.Link}" target="_blank">Mehr Infos</a></td>
-                    `;
-                    tableBody.appendChild(tr);
+                    // Überprüfen, ob die Zeile gültige Daten enthält
+                    if (row.Titel && row.Kurzbeschreibung && row.Datum && row.Link) {
+                        var tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${row.Titel}</td>
+                            <td>${row.Kurzbeschreibung}</td>
+                            <td>${row.Datum}</td>
+                            <td><a href="${row.Link}" target="_blank">Mehr Infos</a></td>
+                        `;
+                        tableBody.appendChild(tr);
+                    }
                 });
             },
             error: function(error) {
